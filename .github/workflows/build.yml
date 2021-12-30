@@ -52,3 +52,10 @@ jobs:
           body: "Prebuilt syphonpy wheel packages version ${{ github.event.inputs.tag }}."
           overwrite: true
           file_glob: true
+
+      # publish to pypi
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
