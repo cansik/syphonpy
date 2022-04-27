@@ -4,3 +4,6 @@ syphonpy.egg-info/
 
 *.user
 xcuserdata
+.idea
+.DS_Store
+venv*
