@@ -39,7 +39,7 @@ jobs:
       - name: Build syphonpy
         run: |
           python -m pip install wheel
-          python setup.py bdist_wheel
+          python setup.py bdist_wheel --plat-name=macosx_11_0_universal2
           ls dist
 
       # upload dist
