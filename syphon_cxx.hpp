@@ -3,7 +3,6 @@
 
 #include <OpenGL/OpenGL.h>
 #include <functional>
-#include <memory>
 #include <string>
 #include <vector>
 

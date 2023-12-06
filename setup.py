@@ -51,7 +51,7 @@ class CMakeBuild(build_ext):
             build_args += ['--', '/m']
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
-            build_args += ['--', '-j2']
+            build_args += ['--', '-j4']
 
         env = os.environ.copy()
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(env.get('CXXFLAGS', ''),
@@ -67,7 +67,7 @@ long_description = (this_directory / "readme.md").read_text()
 
 setup(
     name='syphonpy',
-    version='0.0.2',
+    version='0.0.3',
     # author='TODO',
     # author_email='TODO',
     description='Python bindings for the Syphon Framework (OSX).',

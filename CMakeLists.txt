@@ -6,18 +6,18 @@ set(CMAKE_C_FLAGS "-x objective-c")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -funroll-loops -fomit-frame-pointer")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=gnu++11 -funroll-loops -fomit-frame-pointer")
 
-include_directories(submodules/Syphon-Framework)
+include_directories(submodules/ submodules/Syphon)
 
 add_subdirectory(submodules/pybind11)
 
 set(SOURCE_FILES
-  syphon_cxx.mm
-  )
+        syphon_cxx.mm
+)
 
-file (GLOB SOURCE_SYPHON
-    submodules/Syphon-Framework/*.m
-    submodules/Syphon-Framework/*.c
-    )
+file(GLOB SOURCE_SYPHON
+        submodules/Syphon/*.m
+        submodules/Syphon/*.c
+)
 
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-x objective-c++")
 set_source_files_properties(${SOURCE_SYPHON} PROPERTIES COMPILE_FLAGS "-x objective-c -include Syphon_Prefix.pch -include Foundation/Foundation.h -include OpenGL/OpenGL.h -DDEBUG")
@@ -25,19 +25,19 @@ set_source_files_properties(${SOURCE_SYPHON} PROPERTIES COMPILE_FLAGS "-x object
 
 macro(ADD_OSX_FRAMEWORK fwname target)
     find_library(FRAMEWORK_${fwname}
-    NAMES ${fwname}
-    PATHS ${CMAKE_OSX_SYSROOT}/System/Library
-    PATH_SUFFIXES Frameworks
-    NO_DEFAULT_PATH)
-    if( ${FRAMEWORK_${fwname}} STREQUAL FRAMEWORK_${fwname}-NOTFOUND)
+            NAMES ${fwname}
+            PATHS ${CMAKE_OSX_SYSROOT}/System/Library
+            PATH_SUFFIXES Frameworks
+            NO_DEFAULT_PATH)
+    if (${FRAMEWORK_${fwname}} STREQUAL FRAMEWORK_${fwname}-NOTFOUND)
         MESSAGE(ERROR ": Framework ${fwname} not found")
-    else()
+    else ()
         TARGET_LINK_LIBRARIES(${target} PUBLIC "${FRAMEWORK_${fwname}}")
         MESSAGE(STATUS "Framework ${fwname} found at ${FRAMEWORK_${fwname}}")
-    endif()
+    endif ()
 endmacro(ADD_OSX_FRAMEWORK)
 
-add_library(syphon_lib STATIC  ${SOURCE_SYPHON})
+add_library(syphon_lib STATIC ${SOURCE_SYPHON})
 ADD_OSX_FRAMEWORK(Foundation syphon_lib)
 ADD_OSX_FRAMEWORK(OpenGL syphon_lib)
 ADD_OSX_FRAMEWORK(AppKit syphon_lib)

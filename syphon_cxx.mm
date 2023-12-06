@@ -1,10 +1,7 @@
-#include "SyphonBuildMacros.h"
-
 #include "Syphon.h"
 #include "syphon_cxx.hpp"
 
 #include <OpenGL/OpenGL.h>
-//#include <OpenGL/gl.h>
 #import <OpenGL/gl3.h>
 #include <OpenGL/glu.h>
 
